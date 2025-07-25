@@ -1,0 +1,11 @@
+def recommend_mobiles(mobile_name, top_n=10):
+    try:
+        idx = df[df['name'].str.contains(mobile_name, case=False, na=False)].index[0]
+    except IndexError:
+        return f"No mobile found matching: {mobile_name}"
+
+    sim_scores = list(enumerate(cosine_sim[idx]))
+    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)[1:top_n+1]
+
+    recommended_indices = [i[0] for i in sim_scores]
+    return df.iloc[recommended_indices][['name', 'price', 'ratings']]
