@@ -1,0 +1,6 @@
+df=pd.read_csv(r"mobile_rs.csv")
+df['corpus'] = df['corpus'].fillna('').str.lower()
+df['price'] = df['price'].astype(str).str.replace(r'[₹,]', '', regex=True).astype(int)
+tfidf=TfidfVectorizer(stop_words='english')
+tfidf_matrix=tfidf.fit_transform(df['corpus'])
+cosine_sim=cosine_similarity(tfidf_matrix,tfidf_matrix)
