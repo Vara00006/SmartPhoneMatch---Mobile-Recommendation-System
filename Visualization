@@ -1,0 +1,10 @@
+sample_cosine = cosine_sim[:20, :20]
+sample_names = df['name'].iloc[:20]
+
+plt.figure(figsize=(12, 10))
+sns.heatmap(sample_cosine, xticklabels=sample_names, yticklabels=sample_names, cmap="YlGnBu", annot=True, fmt=".2f")
+plt.title("Cosine Similarity Between Mobiles (Top 20)")
+plt.xticks(rotation=90)
+plt.yticks(rotation=0)
+plt.tight_layout()
+plt.show()
